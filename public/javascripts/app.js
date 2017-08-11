@@ -14,7 +14,9 @@ window.onload = function(){
 	var size = document.getElementById('brushSize')
 	var brushSelect = document.getElementById('brush')
 	var eraserSelect = document.getElementById('eraser')
+	var undo = document.getElementById('undo')
 
+	var path
 	var color = '#000000'
 	var brushSize = 5
 
@@ -33,8 +35,12 @@ window.onload = function(){
 	eraserSelect.addEventListener('click' , function(){
 		eraser.activate()
 	})
-
-	var path
+	
+	undo.addEventListener('click', function(){
+		var undoPath = path
+		path = path.previousSibling
+		undoPath.removeSegments()
+	})
 
 	brush = new Tool()
 
@@ -43,16 +49,12 @@ window.onload = function(){
 		path.add(e.point)
 		path.strokeColor = color
 		path.strokeWidth = brushSize
-		path.strokeCap = 'square'
+		path.strokeCap = 'round'
 	}
 
 	brush.onMouseDrag = function(e){
 		path.add(e.point)
 		path.smooth()
-	}
-
-	brush.onMouseUp = function(){
-		path.simplify()
 	}
 
 	eraser = new Tool()
@@ -62,11 +64,13 @@ window.onload = function(){
 		path.add(e.point)
 		path.strokeColor = '#ffffff'
 		path.strokeWidth = brushSize
+		path.strokeCap = 'round'
 	}
 
 	eraser.onMouseDrag = function(e){
 		path.add(e.point)
+		path.smooth()
 	}
-
+	
 	paper.view.draw()
 }
