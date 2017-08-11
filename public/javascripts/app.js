@@ -1,4 +1,7 @@
 paper.install(window)
+
+var brush, eraser
+
 window.onload = function(){
 
 	var canvas = document.getElementById('canvas')
@@ -9,6 +12,8 @@ window.onload = function(){
 
 	var picker = document.getElementById('picker')
 	var size = document.getElementById('brushSize')
+	var brushSelect = document.getElementById('brush')
+	var eraserSelect = document.getElementById('eraser')
 
 	var color = '#000000'
 	var brushSize = 5
@@ -19,6 +24,14 @@ window.onload = function(){
 
 	size.addEventListener('input', function(){
 		brushSize = size.value
+	})
+
+	brushSelect.addEventListener('click' , function(){
+		brush.activate()
+	})
+	
+	eraserSelect.addEventListener('click' , function(){
+		eraser.activate()
 	})
 
 	var path
@@ -38,8 +51,21 @@ window.onload = function(){
 		path.smooth()
 	}
 
-	path.onMouseUp = function(){
+	brush.onMouseUp = function(){
 		path.simplify()
+	}
+
+	eraser = new Tool()
+
+	eraser.onMouseDown = function(e){
+		path = new paper.Path()
+		path.add(e.point)
+		path.strokeColor = '#ffffff'
+		path.strokeWidth = brushSize
+	}
+
+	eraser.onMouseDrag = function(e){
+		path.add(e.point)
 	}
 
 	paper.view.draw()
