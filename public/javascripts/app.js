@@ -1,37 +1,46 @@
-paper.view.viewSize.width = window.innerWidth
-paper.view.viewSize.height = window.innerHeight
+paper.install(window)
+window.onload = function(){
 
-var picker = document.getElementById('picker')
-var size = document.getElementById('brushSize')
+	var canvas = document.getElementById('canvas')
+	paper.setup(canvas)
 
-var color = '#000000'
-var brushSize = 5
+	paper.view.viewSize.width = window.innerWidth
+	paper.view.viewSize.height = window.innerHeight
 
-window.setColor = function setColor(jscolor){
-  color = '#' + jscolor
-}
+	var picker = document.getElementById('picker')
+	var size = document.getElementById('brushSize')
 
-size.addEventListener('input', function(){
-  brushSize = size.value
-})
+	var color = '#000000'
+	var brushSize = 5
 
-var path
+	window.setColor = function setColor(jscolor){
+		color = '#' + jscolor
+	}
 
-brush = new Tool()
+	size.addEventListener('input', function(){
+		brushSize = size.value
+	})
 
-brush.onMouseDown = function(e){
-  path = new Path()
-  path.add(e.point)
-  path.strokeColor = color
-  path.strokeWidth = brushSize
-  path.strokeCap = 'square'
-}
+	var path
 
-brush.onMouseDrag = function(e){
-  path.add(e.point)
-  path.smooth()
-}
+	brush = new Tool()
 
-path.onMouseUp = function(){
-  path.simplify()
+	brush.onMouseDown = function(e){
+		path = new paper.Path()
+		path.add(e.point)
+		path.strokeColor = color
+		path.strokeWidth = brushSize
+		path.strokeCap = 'square'
+	}
+
+	brush.onMouseDrag = function(e){
+		path.add(e.point)
+		path.smooth()
+	}
+
+	path.onMouseUp = function(){
+		path.simplify()
+	}
+
+	paper.view.draw()
 }
