@@ -51,10 +51,12 @@ window.onload = function(){
 	var bgcolor = new Path.Rectangle({
 		point: [0, 0],
 		size: [view.size.width, view.size.height],
-		strokeColor: 'white',
+		strokeWidth: 0,
 		fillColor: 'white',
 		selected: true
 	})
+
+	layer = new Layer()
 
 	brush = new Tool()
 
