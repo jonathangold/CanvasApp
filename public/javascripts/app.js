@@ -48,6 +48,14 @@ window.onload = function(){
 		download.setAttribute('href', image)
 	})
 
+	var bgcolor = new Path.Rectangle({
+		point: [0, 0],
+		size: [view.size.width, view.size.height],
+		strokeColor: 'white',
+		fillColor: 'white',
+		selected: true
+	})
+
 	brush = new Tool()
 
 	brush.onMouseDown = function(e){
