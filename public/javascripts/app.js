@@ -44,7 +44,7 @@ window.onload = function(){
 	undo.addEventListener('click', function(){
 		var undoPath = path
 		path = path.previousSibling
-		undoPath.removeSegments()
+		undoPath.remove()
 	})
 
 	download.addEventListener('click', function(){
