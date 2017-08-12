@@ -5,15 +5,16 @@
       Canvas App
     </title>
     <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <div>
+    <div id="toolbar">
 	    <input id="picker" type="button" class="jscolor {valueElement:null, value:'000000', closable:true, onFineChange:'setColor(this)'}"></input>
 	    <input id="brushSize" type="range" min="1" max="50" value="5" />
-	    <input id="brush" type="button" value="brush"></input>
-	    <input id="eraser" type="button" value="eraser"></input>
-	    <input id="undo" type="button" value="undo"></input>
-	    <a download="sketch.png" id="download"><button>save</button></a>
+	    <a><button id="brush"><i class="fa fa-paint-brush"></i></button></a>
+	    <a><button id="eraser"><i class="fa fa-eraser"></i></button></a>
+	    <a><button id="undo"><i class="fa fa-undo"></i></button></a>
+	    <a id="download" download="sketch.png"><button><i class="fa fa-save"></i></button></a>
     </div>
     <div>
       <canvas id="canvas"></canvas>

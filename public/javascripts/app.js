@@ -1,7 +1,7 @@
 //inject global scope
 paper.install(window)
 
-//expose required vars 
+//expose required vars to global scope 
 var brush, eraser, setColor
 
 window.onload = function(){
