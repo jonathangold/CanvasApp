@@ -1,27 +1,31 @@
+//inject global scope
 paper.install(window)
 
-var brush, eraser
+//expose required vars 
+var brush, eraser, setColor
 
 window.onload = function(){
 
+//set up paperscope vars
 	var canvas = document.getElementById('canvas')
-	paper.setup(canvas)
-
-	paper.view.viewSize.width = window.innerWidth
-	paper.view.viewSize.height = window.innerHeight
-
 	var picker = document.getElementById('picker')
 	var size = document.getElementById('brushSize')
 	var brushSelect = document.getElementById('brush')
 	var eraserSelect = document.getElementById('eraser')
 	var undo = document.getElementById('undo')
 	var download = document.getElementById('download')
-
 	var path
 	var color = '#000000'
 	var brushSize = 5
+	
+//set up paper canvas
+	paper.setup(canvas)
+	paper.view.viewSize.width = window.innerWidth
+	paper.view.viewSize.height = window.innerHeight
 
-	window.setColor = function setColor(jscolor){
+
+//event listeners
+	setColor = function(jscolor){
 		color = '#' + jscolor
 	}
 
@@ -48,7 +52,8 @@ window.onload = function(){
 		download.setAttribute('href', image)
 	})
 
-	var bgcolor = new Path.Rectangle({
+//create white rectagle for background
+	new Path.Rectangle({
 		point: [0, 0],
 		size: [view.size.width, view.size.height],
 		strokeWidth: 0,
@@ -56,8 +61,10 @@ window.onload = function(){
 		selected: true
 	})
 
+//create the interactive layer
 	layer = new Layer()
 
+//begin tools
 	brush = new Tool()
 
 	brush.onMouseDown = function(e){
@@ -88,5 +95,6 @@ window.onload = function(){
 		path.smooth()
 	}
 	
+//update the view
 	paper.view.draw()
 }
