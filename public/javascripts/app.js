@@ -15,6 +15,7 @@ window.onload = function(){
 	var brushSelect = document.getElementById('brush')
 	var eraserSelect = document.getElementById('eraser')
 	var undo = document.getElementById('undo')
+	var download = document.getElementById('download')
 
 	var path
 	var color = '#000000'
@@ -40,6 +41,11 @@ window.onload = function(){
 		var undoPath = path
 		path = path.previousSibling
 		undoPath.removeSegments()
+	})
+
+	download.addEventListener('click', function(){
+		var image = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream")
+		download.setAttribute('href', image)
 	})
 
 	brush = new Tool()
