@@ -24,7 +24,7 @@ window.onload = function(){
 	paper.view.viewSize.height = window.innerHeight
 
 	//fill in the background
-	new Path.Rectangle(view.bounds)
+	var background = new Path.Rectangle(view.bounds)
 	background.fillColor = 'white'
 	background.sendToBack()
 
