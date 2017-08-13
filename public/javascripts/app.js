@@ -6,7 +6,7 @@ var brush, eraser, setColor
 
 window.onload = function(){
 
-//set up paperscope vars
+	//set up paperscope vars
 	var canvas = document.getElementById('canvas')
 	var picker = document.getElementById('picker')
 	var size = document.getElementById('brushSize')
@@ -17,14 +17,19 @@ window.onload = function(){
 	var path
 	var color = '#000000'
 	var brushSize = 5
-	
-//set up paper canvas
+
+	//set up paper canvas
 	paper.setup(canvas)
 	paper.view.viewSize.width = window.innerWidth
 	paper.view.viewSize.height = window.innerHeight
 
+	//fill in the background
+	new Path.Rectangle(view.bounds)
+	background.fillColor = 'white'
+	background.sendToBack()
 
-//event listeners
+
+	//event listeners
 	setColor = function(jscolor){
 		color = '#' + jscolor
 	}
@@ -36,11 +41,11 @@ window.onload = function(){
 	brushSelect.addEventListener('click' , function(){
 		brush.activate()
 	})
-	
+
 	eraserSelect.addEventListener('click' , function(){
 		eraser.activate()
 	})
-	
+
 	undo.addEventListener('click', function(){
 		var undoPath = path
 		path = path.previousSibling
@@ -52,19 +57,7 @@ window.onload = function(){
 		download.setAttribute('href', image)
 	})
 
-//create white rectagle for background
-	new Path.Rectangle({
-		point: [0, 0],
-		size: [view.size.width, view.size.height],
-		strokeWidth: 0,
-		fillColor: 'white',
-		selected: true
-	})
-
-//create the interactive layer
-	layer = new Layer()
-
-//begin tools
+	//begin tools
 	brush = new Tool()
 
 	brush.onMouseDown = function(e){
@@ -94,7 +87,16 @@ window.onload = function(){
 		path.add(e.point)
 		path.smooth()
 	}
-	
-//update the view
+
+	window.onresize = function(){
+		canvas.width = window.innerWidth
+		canvas.height = window.innerHeight
+		paper.view.viewSize.width = window.innerWidth
+		paper.view.viewSize.height = window.innerHeight
+		new Path.Rectangle(view.bounds)
+		background.fillColor = 'white'
+		background.sendToBack()
+	}
+	//update the view
 	paper.view.draw()
 }
