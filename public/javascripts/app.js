@@ -93,6 +93,8 @@ window.onload = function(){
 		canvas.height = window.innerHeight
 		paper.view.viewSize.width = window.innerWidth
 		paper.view.viewSize.height = window.innerHeight
+
+		//redraw background
 		new Path.Rectangle(view.bounds)
 		background.fillColor = 'white'
 		background.sendToBack()
