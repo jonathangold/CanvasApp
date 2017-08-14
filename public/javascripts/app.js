@@ -53,7 +53,7 @@ window.onload = function(){
 	})
 
 	download.addEventListener('click', function(){
-		var image = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream")
+		var image = canvas.toDataURL('image/png')
 		download.setAttribute('href', image)
 	})
 
