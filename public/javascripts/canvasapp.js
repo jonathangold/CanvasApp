@@ -8,7 +8,6 @@ window.onload = function(){
 
 	//set up paperscope vars
 	var canvas = document.getElementById('canvas')
-	var picker = document.getElementById('picker')
 	var size = document.getElementById('brushSize')
 	var brushSelect = document.getElementById('brush')
 	var eraserSelect = document.getElementById('eraser')
@@ -89,13 +88,14 @@ window.onload = function(){
 	}
 
 	window.onresize = function(){
+		//reset the canvas
 		canvas.width = window.innerWidth
 		canvas.height = window.innerHeight
 		paper.view.viewSize.width = window.innerWidth
 		paper.view.viewSize.height = window.innerHeight
 
 		//redraw background
-		new Path.Rectangle(view.bounds)
+		background = new Path.Rectangle(view.bounds)
 		background.fillColor = 'white'
 		background.sendToBack()
 	}
